@@ -1,0 +1,4 @@
+mode,steps,device_kernel_events,cuda_graph_launch_api,cuda_launch_kernel_api,cuda_launch_kernel_exc_api,profiler_visible_device_events,fused_triton_names_present
+eager,5,825,0,750,75,830,False
+inductor_graph_off,5,285,0,5,100,310,True
+inductor_graph_on,5,290,5,5,0,315,True
