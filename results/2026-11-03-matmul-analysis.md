@@ -5,7 +5,7 @@
 - Source: user-uploaded `matmul_results.tar.gz` containing `outputs/matmul/benchmark.csv` and five textual IR exports: `source.txt`, `ttir.txt`, `ttgir.txt`, `llir.txt`, `ptx.txt`.
 - Archive SHA256: `88857468f987654b7e46cf5d22d4c1b8dea06c0ea44fb8ca568db48896318b17`.
 - Intended system: RTX 5080 and Triton 3.9.0 (per Phase 1). **This archive does not contain an independent environment log**, so the exact runtime versions for this run were not independently confirmed from it.
-- **Correctness**: benchmark script checks Triton vs preallocated `torch.mm` before timing each configuration, and the CSV implies the benchmark ran through its configurations. However **no `pytest` transcript is in the archive**; do not record unit tests as passing without that log.
+- **Correctness**: benchmark script checks Triton vs preallocated `torch.mm` before timing each configuration. Separately, the user subsequently supplied a `matmul_pytest.log` terminal excerpt recording **5 passed in 1.55s**. This excerpt was supplied separately from the archive; it was not re-run by GitHub tooling.
 - This document records externally supplied measurements, not re-execution by GitHub tooling.
 
 ## Experiment design
@@ -55,4 +55,15 @@ These directly establish a generated PTX path using asynchronous global-to-share
 1. Phase 1 vector addition had zero shared-memory allocation and ordinary scalar/vector global reads; this MatMul compilation includes shared staging and matrix instructions, showing why compute kernels require a different memory and layout model.
 2. Larger tiles are not consistently faster; candidate explanations include occupancy, registers, staging costs, launch grid and scheduling, but none is isolated by the existing sweep.
 3. Numerical comparisons are tolerant FP16 checks rather than strict equality. Add explicit max/mean absolute error recording in a future study.
-4. Attach the missing `pytest -q tests/test_matmul.py` output (and environment snapshot) before merging PR #2. Keep benchmark outputs and direct evidence distinct from hypotheses.
+4. Five unit tests were subsequently reported passing; an independent environment snapshot was not provided for this MatMul run. Keep benchmark outputs and direct evidence distinct from hypotheses.
+
+## Additional unit-test validation (subsequent user-supplied transcript)
+
+Command used in the prior instructions: `TRITON_DEFAULT_FP_FUSION=1 python -m pytest tests/test_matmul.py -q`.
+
+```text
+.....                                                                    [100%]
+5 passed in 1.55s
+```
+
+This is a **user-provided local test result**, not a GitHub CI check. It covers the five cases defined in `tests/test_matmul.py`, including irregular matrix dimensions and an incompatible inner dimension. Device/software versions for this specific run were not separately logged.
