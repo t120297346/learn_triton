@@ -14,10 +14,12 @@ CNN accuracy or a new optimized convolution kernel.
 ## Comparison strategy
 
 1. Eager ResNet18 baseline.
-2. Inductor `mode="default"` with `options={"triton.cudagraphs": False}`.
-3. Inductor `mode="default"` with `options={"triton.cudagraphs": True}`.
+2. Inductor `torch.compile(model, options={"triton.cudagraphs": False})` (implicit default mode).
+3. Inductor `torch.compile(model, options={"triton.cudagraphs": True})` (implicit default mode).
 
-This pair keeps the requested compile mode fixed and explicitly toggles
+On the user’s PyTorch version, passing both `mode` and `options` raises a RuntimeError. The script deliberately omits `mode`, which uses the default compilation mode.
+
+This pair keeps the implicit default compile mode fixed and explicitly toggles
 one CUDA Graph configuration option. It provides stronger evidence than
 comparing only `default` to `reduce-overhead`, but the compiler may
 change implementation details or fall back; **a requested graph option

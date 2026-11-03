@@ -33,9 +33,9 @@ def make_models(model):
     return {
         "eager": model,
         "inductor_graph_off": torch.compile(
-            model, mode="default", options={"triton.cudagraphs": False}),
+            model, options={"triton.cudagraphs": False}),
         "inductor_graph_on": torch.compile(
-            model, mode="default", options={"triton.cudagraphs": True}),
+            model, options={"triton.cudagraphs": True}),
     }
 
 

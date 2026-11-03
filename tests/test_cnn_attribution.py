@@ -23,7 +23,7 @@ def test_make_models_has_explicit_modes(monkeypatch):
     assert models["eager"] is marker
     assert captured[0]["options"]["triton.cudagraphs"] is False
     assert captured[1]["options"]["triton.cudagraphs"] is True
-    assert all(c["mode"] == "default" for c in captured)
+    assert all("mode" not in c for c in captured)
 
 
 def test_invalid_numerical_inputs():
