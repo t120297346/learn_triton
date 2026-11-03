@@ -1,0 +1,9 @@
+n,block,warps,median_us,registers_per_thread,shared_bytes,layout,ptx_loads,ptx_stores,trials
+1048576,128,4,4.4719,14,0,"#blocked = #ttg.blocked<{sizePerThread = [1], threadsPerWarp = [32], warpsPerCTA = [4], order = [0]}>",ld.global.b32;ld.global.b32,st.global.b32,5
+1048576,128,8,5.9482,14,0,"#blocked = #ttg.blocked<{sizePerThread = [1], threadsPerWarp = [32], warpsPerCTA = [8], order = [0]}>",ld.global.b32;ld.global.b32,st.global.b32,5
+1048576,256,4,3.0469,16,0,"#blocked = #ttg.blocked<{sizePerThread = [2], threadsPerWarp = [32], warpsPerCTA = [4], order = [0]}>",ld.global.v2.b32;ld.global.v2.b32,st.global.v2.b32,5
+1048576,256,8,3.6732,14,0,"#blocked = #ttg.blocked<{sizePerThread = [1], threadsPerWarp = [32], warpsPerCTA = [8], order = [0]}>",ld.global.b32;ld.global.b32,st.global.b32,5
+1048576,512,4,3.0784,22,0,"#blocked = #ttg.blocked<{sizePerThread = [4], threadsPerWarp = [32], warpsPerCTA = [4], order = [0]}>",ld.global.v4.b32;ld.global.v4.b32,st.global.v4.b32,5
+1048576,512,8,3.0606,16,0,"#blocked = #ttg.blocked<{sizePerThread = [2], threadsPerWarp = [32], warpsPerCTA = [8], order = [0]}>",ld.global.v2.b32;ld.global.v2.b32,st.global.v2.b32,5
+1048576,1024,4,3.6161,28,0,"#blocked = #ttg.blocked<{sizePerThread = [4], threadsPerWarp = [32], warpsPerCTA = [4], order = [0]}>",ld.global.v4.b32;ld.global.v4.b32;ld.global.v4.b32;ld.global.v4.b32,st.global.v4.b32;st.global.v4.b32,5
+1048576,1024,8,3.0882,22,0,"#blocked = #ttg.blocked<{sizePerThread = [4], threadsPerWarp = [32], warpsPerCTA = [8], order = [0]}>",ld.global.v4.b32;ld.global.v4.b32,st.global.v4.b32,5
