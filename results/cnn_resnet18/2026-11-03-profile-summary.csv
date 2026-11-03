@@ -1,0 +1,4 @@
+mode,batch,steps,total_visible_cuda_events,events_per_iteration,unique_event_names,triton_named_events,notes
+Eager,1,10,1660,166,19,0,"Includes cuDNN layout conversions; elementwise and batch norm CUDA kernels"
+Default,1,10,580,58,31,360,"Triton fusion kernels and cuDNN implicit GEMM kernels both visible"
+ReduceOverhead,1,10,590,59,32,360,"Similar Triton fusion counts; additional copy-related event visible"
